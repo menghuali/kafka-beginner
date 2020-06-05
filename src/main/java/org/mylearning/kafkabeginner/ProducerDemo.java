@@ -15,9 +15,13 @@ import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.Level;
 
+/**
+ * Kafka producer demo
+ */
 public class ProducerDemo {
 
     public static void main(String[] args) {
+        // turn off DEBUG log
         ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) LoggerFactory
                 .getLogger(Logger.ROOT_LOGGER_NAME);
         root.setLevel(Level.INFO);
@@ -35,9 +39,9 @@ public class ProducerDemo {
         for (int i = 0; i < 100; i++)
             producer.send(new ProducerRecord<String, String>("first_topic", UUID.randomUUID().toString(),
                     UUID.randomUUID().toString()));
-        producer.flush(); // you must flush or close producer so that data get sent out!
 
-        producer.close();
+        producer.flush(); // you must flush or close producer so that data get sent out!
+        producer.close(); // close producer
     }
 
 }
